@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="toDoApp">
+<head>
+	<title>TO DO APP</title>
+	<script src = "angular.js"></script>
+	<script src = "angularCtrl.js"></script>
+</head>
+<body>
+	<div ng-controller="toDoCtrl as c1" align="center">
+		<h1>To Do App</h1>
+		Task : <input type="text" ng-model="c1.inputTask"></input>
+		<button ng-click="c1.addTask(c1.inputTask)" > Add </button>
+		<hr>
+		<div>
+			<h2> Task List:</h2>
+			<button ng-hide = "c1.editMe" ng-click="c1.editTask()">Edit</button>
+			<button ng-if = "c1.editMe" ng-click="c1.doneTask()">Done</button>
+			<br>
+			<br>
+			<div ng-hide = "c1.editMe">
+				<div ng-repeat="index in c1.taskList track by $index">
+					<label>{{$index+1}} : {{index}}</label>
+					<hr>
+				</div>
+			</div>	
+			<div ng-if = "c1.editMe">
+				<div ng-repeat="i in c1.taskList track by $index">
+					<label>{{$index+1}} :</label>
+					<input type="text" ng-model = "i" ></input>
+					<button ng-click="c1.updateTask($index,i)">Update</button>
+					<button ng-click="c1.removeTask(i)">Delete</button>
+					<hr>
+				</div>
+			</div>	
+		</div>
+	</div>
+</body>
+</html>
